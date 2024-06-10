@@ -1,0 +1,138 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2306                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     rhoCentralFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         0.075;
+
+deltaT          5e-8;
+
+writeControl    adjustable;
+
+writeInterval   .0025;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+graphFormat     raw;
+
+runTimeModifiable true;
+
+adjustTimeStep  yes;
+
+maxCo           0.5;
+
+maxDeltaT       .0025;
+
+functions
+{
+    /*
+    MachNumber
+    {
+        type            MachNo;
+        libs            (fieldFunctionObjects);
+        executeControl  timeStep;
+        writeControl    writeTime;
+    }
+    */
+
+    probes
+    {
+        libs            (sampling);
+        type            probes;
+
+        name            probes;
+
+        writeContorl    writeTime;
+        writeInterval   .025;
+
+        fields
+        (
+            p
+        );
+
+        probeLocations
+        (
+            (0.09 0.011 0) // at end of inlet
+            (.015 0 0) // beginning of ramp
+            (0.03 .0019987629652023315 0) // start of second ramp
+            (0.062 .011 0) // start of flat
+            (0.052 .0082 0) // under cowl
+        );
+
+
+    }
+
+    /*
+    avgInlets
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+        enabled         yes;
+        writeControl    writeTime;
+        log             yes;
+        writeFields     off;
+        surfaceFormat   vtk;
+        regionType      patch;
+        // name            inlet;
+        names           (inlet "inlet.*");
+        operation       weightedAverage;
+        weightField     phi;
+        fields
+        (
+            T
+        );
+    }
+
+    avgOutlets
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+        writeControl    writeTime;
+        log             yes;
+        writeFields     no;
+        regionType      patch;
+        name            outlet;
+        operation       weightedAverage;
+        weightField     phi;
+
+        fields
+        (
+            H2O
+            T
+        );
+    }
+    */
+
+}
+
+
+// ************************************************************************* //

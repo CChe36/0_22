@@ -1,0 +1,76 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2306                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+    {
+name outletA;
+type cellSet;
+action new;
+source zoneToCell;
+sourceInfo
+{
+zone block4;
+}
+}
+{
+name outletB;
+type cellSet;
+action new;
+source zoneToCell;
+sourceInfo
+{
+zone block5;// Matching faces with block27 are to become a baffle.
+}
+}
+// convert to faces
+{
+name outletMFR;
+type faceSet;
+action new;
+source cellToFace;
+sourceInfo
+{
+set outletA;
+option all;
+}
+}
+// get the common subset
+{
+name outletMFR;
+type faceSet;
+action subset;
+source cellToFace;
+sourceInfo
+{
+set outletB;
+option all;
+}
+}
+// convert to a Zone
+{
+name outletMFR;
+type faceZoneSet;
+action new;
+source setToFaceZone;
+sourceInfo
+{
+faceSet outletMFR;
+}
+}
+// end of baffle 0
+);
+// ************************************************************************* //

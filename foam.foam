@@ -1,0 +1,13 @@
+inviscid version of 2.2 inlet
+cell number about 19k
+decomposed
+blockMesh
+trying vanAlbada - not anymroe
+expanded domain
+freestream initial conditions
+viscous - make sure to change mu in thermophysicalProps to not 0
+
+expanded domain, constant back pressure like in https://doi.org/10.2514/1.B35699
+
+TEMPLATE, COPY TO TEST OTHER BACK PRESSURES
+
