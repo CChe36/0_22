@@ -30,7 +30,7 @@ boundaryField
     outlet1
     {
         type            fixedValue;
-	    value 		    uniform 200000;  // pb/pi = 2
+	    value 		    uniform 700000;  // pb/pi = 7
     }
     outlet2
     {
