@@ -14,3 +14,8 @@ Expected resutls, with zeroG outlet, floating back pressure
 and the Mach plot
 ![image](https://github.com/CChe36/0_22/assets/99581216/9df13973-8132-47cb-914e-1383905cc3bc)
 
+
+
+UPDATE 7/23
+Some updated results with a new case, dealing with total pressure values greater than 1 somehow
+![image](https://github.com/user-attachments/assets/bf231dfa-cf26-4807-8c72-064fe7e2bf03)
